@@ -1,4 +1,4 @@
-// src/config.js
+
 module.exports = {
     database: 'asset_tracker',
     username: 'postgres',  
