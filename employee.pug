@@ -1,0 +1,33 @@
+extends layout
+
+block content
+  h1 Employees
+  table.table.table-striped
+    thead
+      tr
+        th ID
+        th Name
+        th Status
+        th Email
+        th Actions
+    tbody
+      each employee in employees
+        tr
+          td= employee.id
+          td= employee.name
+          td= employee.status
+          td= employee.email
+          td
+            form(action=`/employees/delete/${employee.id}`, method='post')
+              button.btn.btn-danger(type='submit') Delete
+  form(action='/employees/add', method='post')
+    div.form-group
+      label(for='name') Name
+      input.form-control(type='text', name='name', required)
+    div.form-group
+      label(for='status') Status
+      input.form-control(type='text', name='status', required)
+    div.form-group
+      label(for='email') Email
+      input.form-control(type='email', name='email', required)
+    button.btn.btn-primary(type='submit') Add Employee

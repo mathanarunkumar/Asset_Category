@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  h1 Asset Categories
+  table.table.table-striped
+    thead
+      tr
+        th ID
+        th Name
+        th Actions
+    tbody
+      each category in categories
+        tr
+          td= category.id
+          td= category.name
+          td
+            form(action=`/asset-categories/delete/${category.id}`, method='post')
+              button.btn.btn-danger(type='submit') Delete
+  form(action='/asset-categories/add', method='post')
+    div.form-group
+      label(for='name') Name
+      input.form-control(type='text', name='name', required)
+    button.btn.btn-primary(type='submit') Add Category

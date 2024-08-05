@@ -1,0 +1,54 @@
+extends layout
+
+block content
+  h1 Assets
+  table.table.table-striped
+    thead
+      tr
+        th ID
+        th Serial Number
+        th Make
+        th Model
+        th Status
+        th Employee
+        th Category
+        th Actions
+    tbody
+      each asset in assets
+        tr
+          td= asset.id
+          td= asset.serialNumber
+          td= asset.make
+          td= asset.model
+          td= asset.status
+          td= asset.Employee ? asset.Employee.name : 'None'
+          td= asset.AssetCategory ? asset.AssetCategory.name : 'None'
+          td
+            form(action=`/assets/delete/${asset.id}`, method='post')
+              button.btn.btn-danger(type='submit') Delete
+  form(action='/assets/add', method='post')
+    div.form-group
+      label(for='serialNumber') Serial Number
+      input.form-control(type='text', name='serialNumber', required)
+    div.form-group
+      label(for='make') Make
+      input.form-control(type='text', name='make', required)
+    div.form-group
+      label(for='model') Model
+      input.form-control(type='text', name='model', required)
+    div.form-group
+      label(for='status') Status
+      input.form-control(type='text', name='status', required)
+    div.form-group
+      label(for='employeeId') Employee
+      select.form-control(name='employeeId')
+        option(value='') None
+        each employee in employees
+          option(value=employee.id)= employee.name
+    div.form-group
+      label(for='categoryId') Category
+      select.form-control(name='categoryId')
+        option(value='') None
+        each category in categories
+          option(value=category.id)= category.name
+    button.btn.btn-primary(type='submit') Add Asset
